@@ -1,4 +1,5 @@
-<?php 
+<?php
+	require 'conexion.php';
 	if (isset($_SERVER['HTTP_ORIGIN'])) {  
 	    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");  
 	    header('Access-Control-Allow-Credentials: true');  
@@ -13,10 +14,6 @@
 	    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))  
 	        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");  
 	}
-
-	$conexion = new mysqli("localhost","root","","viajaconmigo");
-	$conexion->set_charset("utf8");
-
 	$data = file_get_contents("php://input");
 	$datadecode = json_decode($data, true);
 

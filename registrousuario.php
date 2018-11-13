@@ -1,4 +1,5 @@
 <?php
+	require 'conexion.php';
 	if (isset($_SERVER['HTTP_ORIGIN'])) {  
 	    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");  
 	    header('Access-Control-Allow-Credentials: true');  
@@ -23,8 +24,6 @@
 	$telefono = $datadecode['phone'];
 	$apellido = $datadecode['surnames'];
 	$user = $datadecode['username'];
-	$conexion = new mysqli("localhost","root","","viajaconmigo");
-	$conexion->set_charset("utf8");
 	
 	$sql1 = $conexion->prepare("SELECT usuario, documentoidentidad FROM usuario WHERE usuario = ? AND documentoidentidad <> ?");
 	$sql1->bind_param('ss', $user, $documento);

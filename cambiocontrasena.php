@@ -1,11 +1,9 @@
 <?php
+	require 'conexion.php';
 	$user = $_REQUEST['user'];
 	$documento = $_REQUEST['documento'];
 	$contrasenaanterior = $_REQUEST['contrasenaanterior'];
 	$contrasenanueva = md5($_REQUEST['contrasenanueva']);
-
-	$conexion = new mysqli("localhost","root","","viajaconmigo");
-	$conexion->set_charset("utf8");
 	
 	$sql = $conexion->prepare("SELECT * FROM usuario WHERE usuario = ? AND contrasena = ? AND documento = ?");
 	$sql->bind_param('sss', $user, $contrasenaanterior, $documento);

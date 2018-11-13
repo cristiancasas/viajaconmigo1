@@ -20,7 +20,7 @@
 
 	$idgrupo = $_REQUEST['idgrupo'];
 
-	$sql = $conexion->prepare("SELECT us.*, e.nombre as nombreestado FROM grupo g, usuarioporgrupo u, estado e, usuario us WHERE g.idgrupo = u.idgrupo AND us.idusuario = u.idusuario and g.idgrupo = $idgrupo AND e.idestado = u.idestado AND  u.tipo = 2 AND us.idestado = 1 GROUP BY us.idusuario");
+	$sql = $conexion->prepare("SELECT us.*, e.nombre as nombreestado FROM grupo g, usuarioporgrupo u, estado e, usuario us WHERE g.idgrupo = u.idgrupo AND us.idusuario = u.idusuario and g.idgrupo = $idgrupo AND e.idestado = u.idestado AND  u.tipo = 2 GROUP BY us.idusuario");
 	$sql->execute();
 	$result = $sql->get_result();
 	$rows = $result->num_rows;
