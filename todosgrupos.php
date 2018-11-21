@@ -13,8 +13,9 @@
 	  
 	    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))  
 	        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");  
-    }
-	$sql = $conexion->prepare("SELECT g.*, e.nombre as nombreestado FROM grupo g, estado e WHERE e.idestado = g.idestado");
+	}
+	$idusuario = $_REQUEST['idusuario'];
+	$sql = $conexion->prepare("SELECT g.*, e.nombre as nombreestado FROM grupo g, estado e WHERE g.idgrupo NOT IN(select idgrupo from preconfirmacion where idusuario = $idusuario) and  e.idestado = g.idestado");
 	$sql->execute();
 	$result = $sql->get_result();
 	$rows = $result->num_rows;

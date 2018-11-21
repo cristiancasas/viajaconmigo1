@@ -25,7 +25,6 @@
 	$sql1->execute();
 	$result = $sql->get_result();
 	$row = $result->num_rows;
-
 	if($row == 0){
 		$sql2 = $conexion->prepare("INSERT INTO preconfirmacion(idusuario, idgrupo, tipo) values(?, ?, 2)");
 		$sql2->bind_param('ii', $idusuario, $idgrupo);
