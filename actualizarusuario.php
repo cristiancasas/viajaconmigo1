@@ -17,16 +17,16 @@
 	
 	$data = file_get_contents("php://input");
 	$datadecode = json_decode($data, true);
-	$idusuario = $datadecode['UserAdmin'];
-	$nombre = $datadecode['nombre'];
-	$apellido = $datadecode['apellido'];
-	$documento = $datadecode['apellido'];
-	$correo = $datadecode['apellido'];
 	
-
-	$sql = $conexion->prepare("UPDATE usuario SET nombre = ?, apellido = ?, documentoidentidad = ?, correo = ? WHERE idusuario = ?");
-	$sql->bind_param('ssssi', $nombre, $apellido, $documento, $correo, $idusuario);
-	$Sql->execute();
-
+    $correo = $_REQUEST['email'];
+    $datospassword = $_REQUEST['passwordRetry'];
+    $contrasena = $datospassword['password'];
+    $telefono = $_REQUEST['userphone'];
+    $apellido = $_REQUEST['lastname'];
+    $user = $_REQUEST['nameuser'];
+    $idusuario = $_REQUEST['iduser'];
+    $sql = $conexion->prepare("update usuario set nombre = ?, apellido = ?, telefono = ?, correo = ?, usuario = ?, contrasena = ? where idusuario = ?");
+    $sql->bind_param('ssssssi', $nombre, $apellido, $telefono, $correo, $user, $contrasena, $idusuario);
+    $sql->execute();
 	echo json_encode("Datos actualizados correctamente");
 ?>	
