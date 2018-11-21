@@ -20,9 +20,18 @@
 	$idusuario = $datadecode['idusuario'];
 	$idgrupo = $datadecode['idgrupo'];
 
-	$sql = $conexion->prepare("INSERT INTO preconfirmacion(idusuario, idgrupo, tipo) values(?, ?, 2)");
-	$sql->bind_param('ii', $idusuario, $idgrupo);
-	$sql->execute();
+	$sql1 = "select * from preconfirmacion where idusuario = ? and idgrupo = ?";
+	$sql1->bind_param('ii', $idusuario, $idgrupo);
+	$sql1->execute();
+	$result = $sql->get_result();
+	$row = $result->num_rows;
 
-	echo json_encode("Se ha realizado la solicitud");
+	if($row == 0){
+		$sql2 = $conexion->prepare("INSERT INTO preconfirmacion(idusuario, idgrupo, tipo) values(?, ?, 2)");
+		$sql2->bind_param('ii', $idusuario, $idgrupo);
+		$sql2->execute();
+		echo json_encode("Se ha realizado la solicitud");
+	}else{
+		echo json_encode("Ya haz realizado una solicitud de ingreso a este grupo");
+	}
 ?>
